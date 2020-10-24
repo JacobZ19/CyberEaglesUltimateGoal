@@ -77,7 +77,9 @@ public class TensorFlowMotorTest extends LinearOpMode {
     private TFObjectDetector tfod;
 
     @Override
+
     public void runOpMode() {
+        double con = 0.8;
         testM = hardwareMap.dcMotor.get("Test");
         testM.setDirection(DcMotor.Direction.FORWARD);
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
@@ -110,6 +112,7 @@ public class TensorFlowMotorTest extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
+
                 if (tfod != null) {
                     // getUpdatedRecognitions() will return null if no new information is available since
                     // the last time that call was made.
@@ -132,17 +135,20 @@ public class TensorFlowMotorTest extends LinearOpMode {
                             }
                             else if (recognition.getLabel() == LABEL_SECOND_ELEMENT){
                                 telemetry.addData("I saw One", ":)");
-                                sleep(1000);
                                 testM.setPower(-0.5);
-                            }
-                            else if (recognition.getLabel() == NO_ELEMENTS) {
-                                telemetry.addData("I saw nothing", ":)");
                                 sleep(1000);
-                                testM.setPower(0);
+
                             }
+
                         }
                         telemetry.update();
                     }
+                    else {
+                        telemetry.addData("I saw nothing", ":)");
+                        sleep(1000);
+                        testM.setPower(0);
+                    }
+
                 }
             }
         }
@@ -179,6 +185,8 @@ public class TensorFlowMotorTest extends LinearOpMode {
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT, NO_ELEMENTS);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_FIRST_ELEMENT, LABEL_SECOND_ELEMENT);
+
     }
+
 }
