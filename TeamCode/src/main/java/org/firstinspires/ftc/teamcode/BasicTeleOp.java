@@ -101,7 +101,7 @@ public class BasicTeleOp extends OpMode {
         }
 /*
         if (gamepad1.left_stick_y < 1) {
-            leftBackDrive.setPower(-leftBackPower);
+            leftBackDrive.setPower(-leftBackPower); 
             rightBackDrive.setPower(rightBackPower);
             leftFrontDrive.setPower(-leftFrontPower);
             rightBackDrive.setPower(rightFrontPower);
