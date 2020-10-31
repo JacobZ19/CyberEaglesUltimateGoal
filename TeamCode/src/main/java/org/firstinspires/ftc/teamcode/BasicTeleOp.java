@@ -30,7 +30,7 @@ public class BasicTeleOp extends OpMode {
         claw = hardwareMap.get(Servo.class, "claw");
 //Set the Direction for the motors to turn when the robot moves forward//
 
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
         wobbleGoal.setDirection(DcMotorSimple.Direction.FORWARD);
 
